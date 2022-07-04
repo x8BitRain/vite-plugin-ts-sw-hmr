@@ -10,11 +10,15 @@ and it will transpile with HMR.
 
 ### Installation
 
-> yarn add vite-plugin-sw-ts-hmr --dev
+```bash
+yarn add vite-plugin-sw-ts-hmr --dev
+```
 
 or
  
-> npm install vite-plugin-sw-ts-hmr --save-dev
+```bash
+npm install vite-plugin-sw-ts-hmr --save-dev
+```
 
 ### Usage
 
