@@ -1,21 +1,38 @@
-# {{name}}
+# vite-plugin-sw-ts-hmr
 
-[![npm](https://img.shields.io/npm/v/{{name}}.svg)](https://www.npmjs.com/package/{{name}})
-[![Code style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/alecdotbiz)
+[![npm](https://img.shields.io/npm/v/vite-plugin-sw-ts-hmr.svg)](https://www.npmjs.com/package/vite-plugin-sw-ts-hmr)
 
-> {{description}}
+Vite plugin for compiling multiple ServiceWorkers written in TypeScript with HMR.
 
-&nbsp;
+You can use this for any arbitrary TypeScript files, just provide an input and output,
+and it will transpile with HMR.
+
+
+### Installation
+
+> yarn add vite-plugin-sw-ts-hmr --dev
+
+or
+ 
+> npm install vite-plugin-sw-ts-hmr --save-dev
 
 ### Usage
 
 ```ts
-import {{camelize ident}} from '{{name}}'
+import TsServiceWorkers from 'vite-plugin-sw-ts-hmr'
 
 export default {
   plugins: [
-    {{camelize ident}}(),
+    TsServiceWorkers([
+      {
+        inputFile: 'src/firebase-messaging-sw.ts',
+        outputFile: 'public/firebase-messaging-sw.js',
+      },
+      {
+        inputFile: 'src/memes.ts',
+        outputFile: 'public/memes.js',
+      },
+    ]),
   ]
 }
 ```
