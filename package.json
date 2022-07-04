@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-ts-sw-hmr",
   "version": "0.1.0",
-  "description": "Hot Module Replacement for TypeScript Service Workers",
+  "description": "HMR for multiple TypeScript Service Workers",
   "author": "Dashiell Bell",
   "license": "MIT",
   "repository": "x8BitRain/vite-plugin-ts-sw-hmr",

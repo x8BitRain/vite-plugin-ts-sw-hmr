@@ -1,6 +1,6 @@
 # vite-plugin-sw-ts-hmr
 
-[![npm](https://img.shields.io/npm/v/vite-plugin-sw-ts-hmr.svg)](https://www.npmjs.com/package/vite-plugin-sw-ts-hmr)
+[![npm](https://img.shields.io/npm/v/vite-plugin-ts-sw-hmr.svg)](https://www.npmjs.com/package/vite-plugin-ts-sw-hmr)
 
 Vite plugin for compiling multiple ServiceWorkers written in TypeScript with HMR.
 
