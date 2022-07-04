@@ -1,0 +1,36 @@
+{
+  "name": "vite-plugin-ts-sw-hmr",
+  "version": "0.1.0",
+  "description": "Hot Module Replacement for TypeScript Service Workers",
+  "author": "Dashiell Bell",
+  "license": "MIT",
+  "repository": "x8BitRain/vite-plugin-ts-sw-hmr",
+  "main": "dist/plugin.js",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "prepare": "yarn build"
+  },
+  "peerDependencies": {
+    "vite": ">2.0.0-0"
+  },
+  "dependencies": {
+    "rollup": "^2.75.5",i
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.20",
+    "prettier": "^2.0.5",
+    "typescript": "^4.0.0",
+    "vite": "latest"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "service workers",
+    "typescript",
+    "hot module replacement"
+  ]
+}
