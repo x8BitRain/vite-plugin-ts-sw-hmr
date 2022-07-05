@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/vite-plugin-ts-sw-hmr.svg)](https://www.npmjs.com/package/vite-plugin-ts-sw-hmr)
 
-Vite plugin for compiling multiple ServiceWorkers written in TypeScript with HMR.
+Vite plugin for transpiling multiple ServiceWorkers written in TypeScript with HMR.
 
 You can use this for any arbitrary TypeScript files, just provide an input and output,
 and it will transpile with HMR.
