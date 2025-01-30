@@ -1,56 +1,44 @@
-import { rollup, InputOptions, OutputOptions } from 'rollup'
-import typescript from 'rollup-plugin-typescript2'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
+import { BuildOptions, buildSync } from 'esbuild';
+import { join } from 'path';
 
-interface CompileTsServiceWorkerConfig {
-  inputFile: string
-  outputFile: string
+/* eslint-env node */
+
+interface ServiceWorkerHmrPluginConfig {
+  inputFile: string;
+  outputFile: string;
 }
 
-let pluginConfig: CompileTsServiceWorkerConfig[]
+const defaultEsbuildConfig: BuildOptions = {
+  minify: true,
+  bundle: true
+};
 
-let tsOptions: any = {
-  compilerOptions: {
-    isolatedModules: false,
-    lib: ['WebWorker', 'ES2015'],
-    checkJs: false,
-  },
-}
-
-const _writeSw = () => {
-  pluginConfig.forEach(async (config) => {
-    const inputOptions: InputOptions = {
-      input: config.inputFile,
-      plugins: [typescript({ tsconfigOverride: tsOptions }), nodeResolve()],
+const bundleSwPlugin = (config: ServiceWorkerHmrPluginConfig[], esbuildConfig: BuildOptions = defaultEsbuildConfig) => {
+  const doBundle = () => {
+    for (const item of config) {
+      if (!item.inputFile || !item.outputFile) {
+        throw new Error('inputFile and outputFile are required');
+      }
+      buildSync({
+        ...esbuildConfig,
+        entryPoints: [join(process.cwd(), item.inputFile)],
+        outfile: join(process.cwd(), item.outputFile)
+      });
     }
-    const outputOptions: OutputOptions = {
-      file: config.outputFile,
-      format: 'es',
+  };
+  return {
+    apply: 'serve',
+    enforce: 'pre',
+    configResolved() {
+      doBundle();
+    },
+    handleHotUpdate() {
+      doBundle();
+    },
+    writeBundle() {
+      doBundle();
     }
-    const bundle = await rollup(inputOptions)
-    await bundle.write(outputOptions)
-    await bundle.close()
-  })
-}
+  };
+};
 
-const TsServiceWorkers = (
-  config: CompileTsServiceWorkerConfig[],
-  typeScriptOptions: any | null = null
-) => ({
-  name: 'compile-typescript-service-worker',
-  async config() {
-    if (typeScriptOptions) tsOptions = typeScriptOptions
-    pluginConfig = config
-    await _writeSw()
-  },
-  async handleHotUpdate(id: any) {
-    const outputFiles = pluginConfig.map((config) => config.outputFile)
-    if (outputFiles.find((file: string) => id.file.match(file))) return
-    await _writeSw()
-  },
-  async writeBundle() {
-    await _writeSw()
-  },
-})
-
-export default TsServiceWorkers
+export default bundleSwPlugin;
