@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-ts-sw-hmr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HMR for multiple TypeScript Service Workers",
   "author": "Dashiell Bell",
   "license": "MIT",
